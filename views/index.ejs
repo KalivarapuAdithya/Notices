@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <title>NIT DGP Notices</title>
+
+    <style>
+        .container-md{
+            box-shadow: 0px 0px 10px rgb(109, 106, 106);
+        }
+
+        .btn{
+            cursor: pointer;
+            box-shadow: 2px 2px 2px rgb(109, 106, 106);
+        }
+
+
+
+        @media screen and (max-width: 600px) {
+            
+            h1{
+                font-size: 28px;
+            }
+
+        }
+    </style>
+    
+</head>
+<body>
+    <% if(error.length > 0 ){ %>
+        <div class="container-md container-fluid mt-5 alert alert-danger ">
+            <%= error[0] %>
+        </div>
+    <%}%>
+    
+    <% if(success.length > 0 ){ %>
+        <div class="container-md container-fluid mt-5 alert alert-success ">
+            <%= success[0] %>
+        </div>
+    <%}%>
+    <div class="container-md container-fluid mt-5 pb-3 border border-info">
+
+        <h1 class="text-center">NIT Durgapur Notices</h1>
+        <hr>
+        <div>
+            <button class="btn btn-success" style="display: inline-block;" onclick="formVisible(1);">Subscribe</button>
+            <button class="btn btn-danger" style="float: right;" onclick="formVisible(2);">Unsubscribe</button>
+            <div class="vis border border-info mt-3 p-3" style="display:none;">
+                <form action="" method="POST"  onsubmit="return check();">
+                    <div class="form-group">
+                        <label for="email">Email : </label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Enter email" >
+                        <small id="valid"  style="display: none; color: rgb(238, 61, 61); font-weight: bolder;">*cannot be empty</small>
+                    </div>
+                    <button class="btn btn-success" id="submit" type="submit" ></button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        let open1 = 0;
+        let open2 = 0;
+        function formVisible(a)
+        {
+            document.getElementById("email").style.borderColor = "#bbb";
+            let element = document.getElementsByClassName('vis');
+            let submit = document.getElementById('submit');
+            document.getElementById("valid").style.display = "none";
+            if(a == 1)
+            {
+                
+                if(open1 == 0 )
+                {
+                    element[0].style.display = "block";
+                    if(open2 == 1)
+                    open2 = open2^1;
+                }
+                else
+                {
+                    
+                    element[0].style.display = "none";
+                }
+                document.getElementsByTagName("form")[0].setAttribute("action" , "/subscribe");
+                submit.innerHTML = "Subscribe";
+                submit.setAttribute('class' , 'btn btn-success');
+                open1 = open1^1;
+            }
+            if(a == 2)
+            {
+                if(open2 == 0)
+                {
+                    element[0].style.display = "block";
+                    if(open1 == 1)
+                    open1 = open1^1;
+                }
+                else
+                {
+                    
+                    element[0].style.display = "none";
+                }
+                document.getElementsByTagName("form")[0].setAttribute("action" , "/unsubscribe");
+                submit.innerHTML = "Unsubscribe";
+                submit.setAttribute('class' , 'btn btn-danger');
+                open2 = open2^1;
+            }
+            
+            
+        }
+
+        function check()
+        {
+            let email = document.getElementById("email").value;
+            
+            if(email.trim().length > 0)
+            return true;
+            else
+            {
+                document.getElementById("valid").style.display = "block";
+                document.getElementById("email").style.borderColor = "red";
+                return false;
+            }
+            
+
+        }
+    </script>
+</body>
+</html>
