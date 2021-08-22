@@ -9,6 +9,7 @@ require('dotenv').config();
 
 const app = express();
 const url = process.env.URL;
+const PORT = process.env.PORT || 3000;
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -227,7 +228,7 @@ monitor();
 setInterval(monitor , 600000);
 
 
-app.listen('3000' , function (err){
+app.listen(PORT , function (err){
     if(err)
     console.log(err);
     else
