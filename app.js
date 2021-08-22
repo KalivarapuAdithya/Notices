@@ -191,7 +191,7 @@ async function sendMail(data)
             <ol>  
             <br><br>
             <br><br>
-            <a href = 'http://localhost:3000/'> click here to unsubscribe </a>      
+            <a href = 'https://quiet-bastion-46191.herokuapp.com/'> click here to unsubscribe </a>      
             `
         };
     
