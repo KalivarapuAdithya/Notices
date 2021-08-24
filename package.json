@@ -20,7 +20,8 @@
     "express-session": "^1.17.1",
     "mongoose": "^5.11.15",
     "nodemailer": "^6.6.3",
-    "puppeteer": "^10.1.0"
+    "puppeteer": "^10.1.0",
+    "woke-dyno": "0.0.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

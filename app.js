@@ -4,6 +4,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const puppeteer = require('puppeteer');
 const nodemailer = require('nodemailer');
+const wakeDyno = require("woke-dyno");
 
 require('dotenv').config();
 
@@ -191,7 +192,7 @@ async function sendMail(data)
             <ol>  
             <br><br>
             <br><br>
-            <a href = 'https://quiet-bastion-46191.herokuapp.com/'> click here to unsubscribe </a>      
+            <a href = 'https://notices0136.herokuapp.com/'> click here to unsubscribe </a>      
             `
         };
     
@@ -228,9 +229,11 @@ monitor();
 setInterval(monitor , 600000);
 
 
-app.listen(PORT , function (err){
-    if(err)
-    console.log(err);
-    else
-    console.log("connected to port 3000");
+app.listen(PORT , ()=>{
+    wakeDyno({
+        url: "https://notices0136.herokuapp.com/" ,  // url string
+        interval: 60000, // interval in milliseconds (1 minute in this example)
+        startNap: [0, 0, 0, 0], // the time to start nap in UTC, as [h, m, s, ms] (05:00 UTC in this example)
+        endNap: [5, 59, 59, 999] // time to wake up again, in UTC (09:59:59.999 in this example)
+    }).start(); 
 })
